@@ -9,7 +9,7 @@
   Acknowledgement: Clearly acknowledge the resources that you use to complete this assessment
 */
 
-//declare header
+// declare header
 #include <stdio.h>
 #include <string.h>
 
@@ -17,7 +17,8 @@
 char *mystrcat(char *dest, char *src);
 
 // Do not change main()
-int main() {
+int main()
+{
     // Test mystrcat()
     char s1[20] = "Hello, "; // 20 is enough to append s2 into s1
     char s2[] = "World!";
@@ -26,17 +27,19 @@ int main() {
 }
 
 // Implement the function from here
-char *mystrcat(char *dest, char *src) {
-
-     char *ptr = dest;
+char *mystrcat(char *dest, char *src)
+{
+    char *ptr = dest;
 
     // Move the pointer to the end of dest string
-    while (*ptr != '\0') {
+    while (*ptr != '\0')
+    {
         ptr++;
     }
 
     // Append characters from src to dest
-    while (*src != '\0') {
+    while (*src != '\0')
+    {
         *ptr = *src;
         ptr++;
         src++;
