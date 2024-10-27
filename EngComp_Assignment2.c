@@ -14,17 +14,37 @@
 #include <stdlib.h>
 #include <ctype.h>
 
+char year[12][4]={"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", 
+          "Aug", "Sep", "Oct", "Nov", "Dec"};
+          
 // WRITE YOUR FUNCTION HERE
 void strdate(char *src, char *dest) {
-    int i,j;//name of variable
+    //name of variable
+    int i=0,j=0;
+    int month=0;
+    char temp[6];
+    
     //take the number out of punctuation and substitute to *dest
-    for(int i=0;i<strlen(src);i++){
-    
-    
-          if( isdigit(src[i]) ) 
-          dest[j++]=src[i];
+    // Day concatenate to dest
+    dest [0] = src [0];
+    dest [1] = src [1];
+    dest [2] = ' ';
+    // Month concatenate to dest
+    month = (int) ((src[3]-'0')*10)+(src[4]-'0'); 
+    for(int i=0;i<12;i++){
+          if ((month-1)==i){
+            strcat(dest, year[i]);
+            break;
+          }
     }
-     }
+    // Year concatenate to dest
+    temp[0] = ' ';
+    temp[1] = src [6];
+    temp[2] = src [7];
+    temp[3] = src [8];
+    temp[4] = src [9];
+    strcat(dest,temp);
+}
 
 // PLEASE DON'T CHANGE ANYTHING FROM THIS LINE
 int main() {
