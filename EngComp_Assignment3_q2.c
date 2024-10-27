@@ -9,53 +9,44 @@
   Acknowledgement: Clearly acknowledge the resources that you use to complete this assessment
 */
 
-//Declare header
-#include <stdio.h>
+// declare header
 #include <stdio.h>
 #include <string.h>
-#include<ctype.h>
 
+// Declare the function
+char *mystrcat(char *dest, char *src);
 
-int main(void) {
-
-    //open FILE
-    FILE *fp=fopen("data.txt","r");
-    FILE *fp1=fopen("result.txt","w");
-
-    //declare variable
-    int i;
-    char line[1024];
-    float a[9999];
-    float average=0.0;
-    int count=1;
-
-    //while function to get string
-  while (fgets(line, 1024, fp)!=NULL)
-    {
-        
-        //declare variable
-        char word[100];
-        float word_len=0.0;
-        
-        //calculate average
-        for(int i=0;i<strlen(line);i++){
-           if(isspace(line[i])==0){
-                word_len++;
-                count++;
-           }
-                if(isspace(line[i])!=0){ 
-                    average=(average+word_len/2);
-                    a[i]=word_len;
-                    word_len=0;
-                }
-          
-           }
-       } 
-       
-
-    //print to another file
-    fprintf(fp1,"%.2f",average);
-    fclose(fp);
-    fclose(fp1);   
+// Do not change main()
+int main()
+{
+    // Test mystrcat()
+    char s1[20] = "Hello, "; // 20 is enough to append s2 into s1
+    char s2[] = "World!";
+    printf("%s\n", mystrcat(s1, s2));
     return 0;
+}
+
+// Implement the function from here
+char *mystrcat(char *dest, char *src)
+{
+    char *ptr = dest;
+
+    // Move the pointer to the end of dest string
+    while (*ptr != '\0')
+    {
+        ptr++;
+    }
+
+    // Append characters from src to dest
+    while (*src != '\0')
+    {
+        *ptr = *src;
+        ptr++;
+        src++;
+    }
+
+    // Null terminate the concatenated string
+    *ptr = '\0';
+
+    return dest;
 }
