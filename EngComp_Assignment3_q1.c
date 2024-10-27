@@ -28,17 +28,22 @@ int main() {
 // Implement the function from here
 char *mystrcat(char *dest, char *src) {
 
-    //declare variable temp
-    char *temp;
+     char *ptr = dest;
 
-    //use for loop to substitute the value
-    for(int i=0;i<strlen(src);i++){
-        temp=&src[i];
-        for(int j=0;j<strlen(dest);j++){
-            temp=&dest[j];
-        }
+    // Move the pointer to the end of dest string
+    while (*ptr != '\0') {
+        ptr++;
     }
 
-    //return the variable
-    return temp;
+    // Append characters from src to dest
+    while (*src != '\0') {
+        *ptr = *src;
+        ptr++;
+        src++;
+    }
+
+    // Null terminate the concatenated string
+    *ptr = '\0';
+
+    return dest;
 }
