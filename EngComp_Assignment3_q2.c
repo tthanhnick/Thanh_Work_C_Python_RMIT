@@ -9,44 +9,53 @@
   Acknowledgement: Clearly acknowledge the resources that you use to complete this assessment
 */
 
-// declare header
+// Declare header
+#include <stdio.h>
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 
-// Declare the function
-char *mystrcat(char *dest, char *src);
-
-// Do not change main()
-int main()
+int main(void)
 {
-    // Test mystrcat()
-    char s1[20] = "Hello, "; // 20 is enough to append s2 into s1
-    char s2[] = "World!";
-    printf("%s\n", mystrcat(s1, s2));
-    return 0;
-}
+  // open FILE
+  FILE *fp = fopen("data.txt", "r");
+  FILE *fp1 = fopen("result.txt", "w");
 
-// Implement the function from here
-char *mystrcat(char *dest, char *src)
-{
-    char *ptr = dest;
+  // declare variable
+  float average = 0.0;
+  int word_len = 1; // count first word - no spaces
+  int char_len = 0;
+  char c = '\0';
+  if (fp == NULL)
+  {
+    fprintf(stderr, "Could not open input file.\n");
+    return 1;
+  }
 
-    // Move the pointer to the end of dest string
-    while (*ptr != '\0')
+  if (fp1 == NULL)
+  {
+    fprintf(stderr, "Could not open output file.\n");
+    fclose(fp);
+    return 1;
+  }
+  // while function to get string
+  while ((c = fgetc(fp)) != EOF)
+  {
+    if (isspace(c) == 0) // if(c != ' ')
     {
-        ptr++;
+      char_len++;
     }
-
-    // Append characters from src to dest
-    while (*src != '\0')
+    if (isspace(c) != 0) // if(c == ' ')
     {
-        *ptr = *src;
-        ptr++;
-        src++;
+      word_len++;
     }
+  }
+  // calculate average
+  average = (float)(char_len - 3) / (float)word_len;
 
-    // Null terminate the concatenated string
-    *ptr = '\0';
-
-    return dest;
+  // print to another file
+  fprintf(fp1, "%.2f", average);
+  fclose(fp);
+  fclose(fp1);
+  return 0;
 }
